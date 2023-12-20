@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 00:32:44 by amabrouk          #+#    #+#             */
-/*   Updated: 2023/12/18 22:36:02 by amabrouk         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:27:54 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ char	*ft_get_next(char *var)
 
 	i = 0;
 	if (!var)
-		return (free(var), var = NULL, NULL);
+		return (free(var), NULL);
 	while (var[i] != '\n' && var[i])
 		i++;
 	if (var[i] == '\n')
 		i++;
 	string = ft_strdup(var + i);
-	return (free(var), var = NULL, string);
+	return (free(var), string);
 }
 
 char	*ft_get_line(char *var)
@@ -35,7 +35,7 @@ char	*ft_get_line(char *var)
 
 	i = 0;
 	if (!var)
-		return (free(var), var = NULL, NULL);
+		return (free(var), NULL);
 	while (var[i] && var[i] != '\n')
 		i++;
 	if (var[i] == '\n')
@@ -53,13 +53,13 @@ char	*ft_read(int fd, char *buffer, char *var)
 	{
 		r_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (r_bytes == -1)
-			return (free(var), free(buffer), buffer = NULL, var = NULL, NULL);
+			return (free(var), free(buffer), NULL);
 		buffer[r_bytes] = '\0';
 		var = ft_strjoin(var, buffer);
 	}
 	free(buffer);
 	if (var && var[0] == 0)
-		return (free(var), var = NULL, NULL);
+		return (free(var), NULL);
 	return (var);
 }
 

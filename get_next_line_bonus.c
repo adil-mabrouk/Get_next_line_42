@@ -6,7 +6,7 @@
 /*   By: amabrouk <amabrouk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:42:33 by amabrouk          #+#    #+#             */
-/*   Updated: 2023/12/18 22:19:43 by amabrouk         ###   ########.fr       */
+/*   Updated: 2023/12/20 17:27:17 by amabrouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ char	*ft_get_next(char *var)
 	int		i;
 
 	if (!var)
-		return (free(var), var = NULL, NULL);
+		return (free(var), NULL);
 	i = 0;
 	while (var[i] && var[i] != '\n')
 		i++;
 	if (var[i] == '\n')
 		i++;
 	string = ft_strdup(var + i);
-	return (free(var), var = NULL, string);
+	return (free(var), string);
 }
 
 char	*ft_get_line(char *var)
@@ -34,7 +34,7 @@ char	*ft_get_line(char *var)
 	char	*line;
 
 	if (!var)
-		return (free(var), var = NULL, NULL);
+		return (free(var), NULL);
 	i = 0;
 	while (var[i] && var[i] != '\n')
 		i++;
@@ -53,13 +53,13 @@ char	*ft_read(int fd, char *buffer, char *var)
 	{
 		r_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (r_bytes == -1)
-			return (free(var), free(buffer), var = NULL, buffer = NULL, NULL);
+			return (free(var), free(buffer), NULL);
 		buffer[r_bytes] = 0;
 		var = ft_strjoin(var, buffer);
 	}
 	free(buffer);
 	if (var && !var[0])
-		return (free(var), var = NULL, NULL);
+		return (free(var), NULL);
 	return (var);
 }
 
